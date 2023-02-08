@@ -316,6 +316,10 @@
         </div>
     </div>
 
+    <?php
+    highlight_string( file_get_contents($_SERVER['SCRIPT_FILENAME']));
+    ?>
+    
     <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <!-- Vendor JS-->
