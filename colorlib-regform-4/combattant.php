@@ -48,13 +48,13 @@
                 $requete4 = "INSERT INTO `combatant`(nom, prenom, sex, poid, taille, nationalite, naissance) VALUES ('" .$_POST["nom"]. "','".$_POST["prenom"]."','".$_POST["gender"]."','".$_POST["poid"]."','".$_POST["Taille"]."','".$_POST["nationality"]."','".$_POST["birthday"]."')";
                 $resultat4 = $GLOBALS["pdo"]->query($requete4);
                 //resultat est du coup un objet de type PDOStatement
-                header('Location: accueil.php');
+                header('Location: index.php');
                 exit();
             }
 
             if(isset($_POST["Accueil"]))
             {
-                header('Location: accueil.php');
+                header('Location: index.php');
                 exit();
             }
 

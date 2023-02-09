@@ -60,7 +60,7 @@
                     $requete4 = "INSERT INTO `combat`(idcombatant1, idcombatant2, idjwin, idlieux, ddateheure) VALUES ('" .$_POST["combattant1"]. "','".$_POST["combattant2"]."','".$_POST["gagnant"]."','".$_POST["llieux"]."','".$_POST["datecombat"]."')";
                     $resultat4 = $GLOBALS["pdo"]->query($requete4);
                     //resultat est du coup un objet de type PDOStatement
-                    header('Location: accueil.php');
+                    header('Location: index.php');
                     exit();
                 }
                else if ($_POST["combattant1"] == $_POST["combattant2"]){
@@ -75,7 +75,7 @@
 
             if(isset($_POST["Accueil"]))
             {
-                header('Location: accueil.php');
+                header('Location: index.php');
                 exit();
             }
 
