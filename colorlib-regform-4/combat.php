@@ -57,7 +57,7 @@
             {
                 if ($_POST["combattant1"] != $_POST["combattant2"] && ( $_POST["gagnant"] == $_POST["combattant1"] || $_POST["gagnant"] == $_POST["combattant2"] ) ){
                     
-                    $requete4 = "INSERT INTO `combat`(idcombatant1, idcombatant2, idjwin, idlieux, ddateheure) VALUES ('" .$_POST["combattant1"]. "','".$_POST["combattant2"]."','".$_POST["gagnant"]."','".$_POST["Lieux"]."','".$_POST["datecombat"]."') WHERE lieux1.id = combat.idlieux && combat.idcombatant1 = combatant.id && combat.idcombatant2 = combatant.id";
+                    $requete4 = "INSERT INTO `combat`(idcombatant1, idcombatant2, idjwin, idlieux, ddateheure) VALUES ('" .$_POST["combattant1"]. "','".$_POST["combattant2"]."','".$_POST["gagnant"]."','".$_POST["llieux"]."','".$_POST["datecombat"]."')";
                     $resultat4 = $GLOBALS["pdo"]->query($requete4);
                     //resultat est du coup un objet de type PDOStatement
                     header('Location: accueil.php');
@@ -99,7 +99,7 @@
                                     <!-- Lieu -->
                                     <label class="label">Selectionnez le lieu du combat</label>
                                     <div class="rs-select2 js-select-simple select--no-search"> 
-                                        <select name="Lieux" required>
+                                        <select name="llieux" required>
                                             <option value disabled="disabled" selected="selected">Lieu</option>
                                             <?php
                                             foreach ($tabLieux1 as $Lieux) {
