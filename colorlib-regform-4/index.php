@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
+<?php
+session_start();
+?>
 
 <head>
     <!-- Required meta tags-->
@@ -10,7 +13,7 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>Accueil</title>
+    <title>Connexion</title>
 
     <!-- Icons font CSS-->
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -25,51 +28,107 @@
     <!-- Main CSS-->
     <link href="css/main.css" rel="stylesheet" media="all">
 
-    <link rel="icon" type="image/ico" sizes="700x700" href="img/icone.jpg">
+    <link rel="icon" type="image/ico" sizes="700x700" href="img/icone.png">
 </head>
 
 <body>
     <?php
-    try{
-        if(isset($_POST["combattant"]))
+        
+    $erreur = 0;
+    if(isset($_POST["Valider"]))
+    {
+        if($_POST["id"]=="root" && $_POST["password"]=="root")
         {
-            header('Location: combattant.php');
-            exit();
+            /*Si on a appuyé sur le bouton valider, que l'identifiant est root, et que le mot de passe est root, 
+            alors nous somme identifiés. On le met dans la variable "EtatConnexion" qu'on met à "true", soit vraie. */
+            $_SESSION["EtatConnexion"] = true ; 
         }
-        if(isset($_POST["combat"]))
-        {
-            header('Location: combat.php');
-            exit();
-        }
-   
-    ?>
 
-    
-    <div class="page-wrapper bg-gra-03 p-t-130 p-b-100 font-poppins">
-        <div class="wrapper wrapper--w680">
-            <div class="card card-4">
-                <div class="card-body">
-                    <h2 class="title" style="font-size:20px; text-align:center">Bienvenue sur le créateur de combat de vos rêves</h2>
-                    <!-- Début du formulaire -->
-                    <form method="POST">
-                        <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="submit" name="combattant" >combattant</button>
-                            <button class="btn btn--radius-2 btn--blue" type="submit" name="combat">combat</button>
-                        </div>
-                    </form>
+        if ($_POST["id"]!="root")
+        {
+
+            $erreur = 1;
+           }
+        if ($_POST["password"]!="root")
+        {
+
+            $erreur = 2;
+        }
+        if ($_POST["id"]!="root" && $_POST["password"]!="root")
+        {
+
+            $erreur = 3;
+        }
+    }
+
+    if(isset($_SESSION["EtatConnexion"]) && $_SESSION["EtatConnexion"]==true)
+    {
+        //Si on est connecté, alors on redirige l'utilisateur vers la page d'accueil.
+        header('Location: accueil.php');
+        exit();
+    }
+
+    else{
+        ?>
+        <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+            <div class="wrapper wrapper--w680l">
+                <div class="card card-4">
+                    <div class="card-body">
+                        <h2 class="title">Veuillez vous connecter pour acceder au super gestionnaire de l'UFC</h2>
+                        <!-- Début du formulaire -->
+                        <form method="POST">
+                            <!-- Identifiant -->
+                            <div class="col-3">  
+                                <div class="input-group">        
+                                    <label class="label">Identifiant</label>
+                                    <input class="input--style-4" type="text" name="id" required minlength="3" maxlength="20" required>
+                                    <div>
+                                        <?php
+                                        if ($erreur == 1) {
+                                            echo '<div class="text-red">Ceci est un mauvais identifiant !</div>';
+                                        }
+                                        if ($erreur == 3) {
+                                            echo '<div class="text-red">Ceci est un mauvais identifiant !</div>';
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Mot de passe -->
+                            <div class="col-3">
+                                <div class="input-group">
+                                    <label class="label">Mot de passe</label>
+                                    <input class="input--style-4" type="text" name="password" required minlength="3" maxlength="20" required>
+                                    <div>
+                                        <?php
+                                        if ($erreur == 2) {
+                                            echo '<div class="text-red">Ceci est un mauvais mot de passe !</div>';
+                                        }
+                                        if ($erreur == 3) {
+                                            echo '<div class="text-red">Ceci est un mauvais mot de passe !</div>';
+                                        }
+                                        ?>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Bouton connexion -->
+                            <div class="p-t-15">
+                                <button class="btn btn--radius-2 btn--blue" type="submit" name="Valider">Connexion</button>
+                            </div>
+                        </form>                  
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     <?php
-     }catch(Exception $error)
-     {
-        echo"error est".$error->getMessage();
-     }
+    }
 
-     
+
+
+    highlight_string( file_get_contents($_SERVER['SCRIPT_FILENAME']));
     ?>
 
+    
     <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>
     <!-- Vendor JS-->

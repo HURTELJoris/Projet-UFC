@@ -23,7 +23,13 @@
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
 }
-
+.text-red {
+  font-size: 16px;
+  color: #fa4251;
+  text-transform: capitalize;
+  display: block;
+  margin-bottom: 5px;
+}
 .row-space {
   -webkit-box-pack: justify;
   -webkit-justify-content: space-between;
@@ -38,11 +44,17 @@
   width: calc((100% - 30px) / 2);
 }
 
+.col-3 {
+  width: 70%;
+}
+
 @media (max-width: 767px) {
   .col-2 {
     width: 100%;
   }
 }
+
+
 
 /* ==========================================================================
    #BOX-SIZING
@@ -169,8 +181,6 @@ h6 {
   background: #fa4251;
 }
 
-
-
 .bg-gra-01 {
   background: -webkit-gradient(linear, left bottom, left top, from(#fbc2eb), to(#a18cd1));
   background: -webkit-linear-gradient(bottom, #fbc2eb 0%, #a18cd1 100%);
@@ -181,6 +191,13 @@ h6 {
 
 .bg-gra-02 {
   background-image: url("../img/Capture.PNG");
+}
+.bg-gra-03 {
+  background-image: url("../img/UFC-Paris-programme-TV-chaine-RMC-Sport-2.png");
+}
+
+.bg-gra-04 {
+  background-image: url("../img/38689590_1037717603051335_320576582311739392_n.jpg");
 }
 
 /* ==========================================================================
@@ -362,6 +379,7 @@ input {
 }
 
 .input--style-4 {
+
   line-height: 50px;
   background: #fafafa;
   -webkit-box-shadow: inset 0px 1px 3px 0px rgba(0, 0, 0, 0.08);
@@ -413,13 +431,7 @@ input {
   display: block;
   margin-bottom: 5px;
 }
-.text-red {
-  font-size: 16px;
-  color: #fa4251;
-  text-transform: capitalize;
-  display: block;
-  margin-bottom: 5px;
-}
+
 .radio-container {
   display: inline-block;
   position: relative;
@@ -613,7 +625,7 @@ input {
    ========================================================================== */
 .title {
   font-size: 24px;
-  color: #525252;
+  color: #000000;
   font-weight: 400;
   margin-bottom: 40px;
 }

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
-
+<?php
+session_start();
+?>
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
@@ -10,7 +12,7 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>Inscription</title>
+    <title>Création du combat</title>
 
     <!-- Icons font CSS-->
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -50,7 +52,14 @@
             $tabLieux1 = $resultat2->fetchALL();
 
 
-
+            if(isset($_POST["Deconnexion"]))
+            {   
+                //Si on appuie sur le bouton "Deconnexion", on supprime les données de la session et on la détruit.
+                session_unset();
+                session_destroy();
+                header('Location: index.php');
+                exit();
+            }
 
             $erreur = 0;
             if(isset($_POST["Valider"]))
@@ -60,7 +69,7 @@
                     $requete4 = "INSERT INTO `combat`(idcombatant1, idcombatant2, idjwin, idlieux, ddateheure) VALUES ('" .$_POST["combattant1"]. "','".$_POST["combattant2"]."','".$_POST["gagnant"]."','".$_POST["llieux"]."','".$_POST["datecombat"]."')";
                     $resultat4 = $GLOBALS["pdo"]->query($requete4);
                     //resultat est du coup un objet de type PDOStatement
-                    header('Location: index.php');
+                    header('Location: accueil.php');
                     exit();
                 }
                else if ($_POST["combattant1"] == $_POST["combattant2"]){
@@ -68,27 +77,25 @@
                 $erreur = 1;
                }
                else if ($_POST["gagnant"] != $_POST["combattant1"] || $_POST["gagnant"] != $_POST["combattant2"]){
-                //echo"Un combattant ne peut pas se combattre lui-meme !";
+                //echo"Le gagnant est forcement un des deux combattants !";
                 $erreur = 2;
+               }
+               else if ($_POST["combattant1"] == $_POST["combattant2"] && $_POST["gagnant"] != $_POST["combattant1"] || $_POST["gagnant"] != $_POST["combattant2"]){
+                //echo"Un combattant ne peut pas se combattre lui-meme !";
+                //echo"Le gagnant est forcement un des deux combattants !";
+                $erreur = 3;
                }
             }
 
             if(isset($_POST["Accueil"]))
             {
-                header('Location: index.php');
+                header('Location: accueil.php');
                 exit();
             }
 
-            if(isset($_POST["Deconnexion"]))
-            {   
-                //Si on appuie sur le bouton "Deconnexion", on supprime les données de la session et on la détruit.
-                session_unset();
-            }
-            
-          
-
+        
             ?>
-            <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+            <div class="page-wrapper bg-gra-04 p-t-130 p-b-100 font-poppins">
                 <div class="wrapper wrapper--w680l">
                     <div class="card card-4">
                         <div class="card-body">
@@ -109,7 +116,7 @@
                                             }
                                             ?>
                                         </select>
-                                        <!-- Date de naissance -->
+                                    <!-- Date de naissance -->
                                     <div class="col-2">
                                         <div class="input-group">
                                             <label class="label">Date du combat</label>
@@ -156,16 +163,15 @@
                                             ?>
                                         </select>
                                     </div>
-                  
                                 </div>
-                                    <!-- Bouton envoyer -->
+                                <!-- Bouton envoyer -->
                                 <div class="p-t-15">
                                     <button class="btn btn--radius-2 btn--blue" type="submit" name="Valider">Envoyer</button>
                                 </div>
                             </form>
                             <!-- Boutons en dehors du formulaire pour qu'ils soient indépendants de sa complétion -->
                             <form action="" method="post" class="form-example">
-                                <!-- Bouton deconnexion -->
+                                <!-- Bouton accueil -->
                                 <div class="p-t-15">
                                     <button class="btn btn--radius-2 btn--blue" type="submit" name="Accueil">Retour à l'accueil</button>
                                 <!-- Bouton deconnexion -->

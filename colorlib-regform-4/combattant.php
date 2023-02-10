@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="fr">
-
+<?php
+session_start();
+?>
 <head>
     <!-- Required meta tags-->
     <meta charset="UTF-8">
@@ -10,7 +12,7 @@
     <meta name="keywords" content="Colorlib Templates">
 
     <!-- Title Page-->
-    <title>Inscription</title>
+    <title>Ajout d'un combattant</title>
 
     <!-- Icons font CSS-->
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
@@ -41,6 +43,14 @@
 
 
 
+            if(isset($_POST["Deconnexion"]))
+            {   
+                //Si on appuie sur le bouton "Deconnexion", on supprime les données de la session et on la détruit.
+                session_unset();
+                session_destroy();
+                header('Location: index.php');
+                exit();
+            }
 
             if(isset($_POST["Valider"]))
             {
@@ -48,20 +58,14 @@
                 $requete4 = "INSERT INTO `combatant`(nom, prenom, sex, poid, taille, nationalite, naissance) VALUES ('" .$_POST["nom"]. "','".$_POST["prenom"]."','".$_POST["gender"]."','".$_POST["poid"]."','".$_POST["Taille"]."','".$_POST["nationality"]."','".$_POST["birthday"]."')";
                 $resultat4 = $GLOBALS["pdo"]->query($requete4);
                 //resultat est du coup un objet de type PDOStatement
-                header('Location: index.php');
+                header('Location: accueil.php');
                 exit();
             }
 
             if(isset($_POST["Accueil"]))
             {
-                header('Location: index.php');
+                header('Location: accueil.php');
                 exit();
-            }
-
-            if(isset($_POST["Deconnexion"]))
-            {   
-                //Si on appuie sur le bouton "Deconnexion", on supprime les données de la session et on la détruit.
-                session_unset();
             }
             
             else{
@@ -349,7 +353,7 @@
                                 </form>
                                 <!-- Boutons en dehors du formulaire pour qu'ils soient indépendants de sa complétion -->
                                 <form action="" method="post" class="form-example">
-                                    <!-- Bouton deconnexion -->
+                                    <!-- Bouton accueil -->
                                     <div class="p-t-15">
                                         <button class="btn btn--radius-2 btn--blue" type="submit" name="Accueil">Retour à l'accueil</button>
                                     <!-- Bouton deconnexion -->
