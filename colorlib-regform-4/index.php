@@ -46,17 +46,14 @@ session_start();
 
         if ($_POST["id"]!="root")
         {
-
             $erreur = 1;
            }
         if ($_POST["password"]!="root")
         {
-
             $erreur = 2;
         }
         if ($_POST["id"]!="root" && $_POST["password"]!="root")
         {
-
             $erreur = 3;
         }
     }
@@ -70,7 +67,7 @@ session_start();
 
     else{
         ?>
-        <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="page-wrapper bg-gra-05 p-t-130 p-b-100 font-poppins">
             <div class="wrapper wrapper--w680l">
                 <div class="card card-4">
                     <div class="card-body">
@@ -81,7 +78,7 @@ session_start();
                             <div class="col-3">  
                                 <div class="input-group">        
                                     <label class="label">Identifiant</label>
-                                    <input class="input--style-4" type="text" name="id" required minlength="3" maxlength="20" required>
+                                    <input class="input--style-4" type="text" name="id" required>
                                     <div>
                                         <?php
                                         if ($erreur == 1) {
@@ -98,7 +95,7 @@ session_start();
                             <div class="col-3">
                                 <div class="input-group">
                                     <label class="label">Mot de passe</label>
-                                    <input class="input--style-4" type="text" name="password" required minlength="3" maxlength="20" required>
+                                    <input class="input--style-4" type="text" name="password" required>
                                     <div>
                                         <?php
                                         if ($erreur == 2) {

@@ -72,19 +72,21 @@ session_start();
                     header('Location: accueil.php');
                     exit();
                 }
-               else if ($_POST["combattant1"] == $_POST["combattant2"]){
-                //echo"Un combattant ne peut pas se combattre lui-meme !";
-                $erreur = 1;
-               }
-               else if ($_POST["gagnant"] != $_POST["combattant1"] || $_POST["gagnant"] != $_POST["combattant2"]){
-                //echo"Le gagnant est forcement un des deux combattants !";
-                $erreur = 2;
-               }
-               else if ($_POST["combattant1"] == $_POST["combattant2"] && $_POST["gagnant"] != $_POST["combattant1"] || $_POST["gagnant"] != $_POST["combattant2"]){
-                //echo"Un combattant ne peut pas se combattre lui-meme !";
-                //echo"Le gagnant est forcement un des deux combattants !";
-                $erreur = 3;
-               }
+                if ($_POST["combattant1"] == $_POST["combattant2"])
+                {
+                    //echo"Un combattant ne peut pas se combattre lui-meme !";
+                    $erreur = 1;
+                }
+                if ($_POST["gagnant"] != $_POST["combattant1"] || $_POST["gagnant"] != $_POST["combattant2"])
+                {
+                    //echo"Le gagnant est forcement un des deux combattants !";
+                    $erreur = 2;
+                }
+                if ($_POST["combattant1"] == $_POST["combattant2"] && $_POST["gagnant"] != $_POST["combattant1"] || $_POST["gagnant"] != $_POST["combattant2"]){
+                    //echo"Un combattant ne peut pas se combattre lui-meme !";
+                    //echo"Le gagnant est forcement un des deux combattants !";
+                    $erreur = 3;
+                }
             }
 
             if(isset($_POST["Accueil"]))
@@ -138,6 +140,16 @@ session_start();
                                             ?>
                                         </select>
                                         <div class="select-dropdown"></div>
+                                        <div>
+                                            <?php
+                                            if ($erreur == 1) {
+                                                echo '<div class="text-red">Un combattant ne peut pas se combattre lui-meme !</div>';
+                                            }
+                                            if ($erreur == 3) {
+                                                echo '<div class="text-red">Un combattant ne peut pas se combattre lui-meme !</div>';
+                                            }
+                                            ?>
+                                        </div>
                                          <!-- Combattant 2 -->
                                         <label class="label">Selectionnez le combattant 2</label>
                                         <select name="combattant2" required>
@@ -150,6 +162,16 @@ session_start();
                                             }
                                             ?>
                                         </select>
+                                        <div>
+                                            <?php
+                                            if ($erreur == 1) {
+                                                echo '<div class="text-red">Un combattant ne peut pas se combattre lui-meme !</div>';
+                                            }
+                                            if ($erreur == 3) {
+                                                echo '<div class="text-red">Un combattant ne peut pas se combattre lui-meme !</div>';
+                                            }
+                                            ?>
+                                        </div>
                                          <!-- Gagnant -->
                                         <label class="label">Selectionnez le gagnant du combat</label>
                                         <select name="gagnant" required>
@@ -162,6 +184,16 @@ session_start();
                                             }
                                             ?>
                                         </select>
+                                        <div>
+                                            <?php
+                                            if ($erreur == 2) {
+                                                echo '<div class="text-red">Le gagnant est forcement un des deux combattants !</div>';
+                                            }
+                                            if ($erreur == 3) {
+                                                echo '<div class="text-red">Le gagnant est forcement un des deux combattants !</div>';
+                                            }
+                                            ?>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- Bouton envoyer -->
@@ -178,16 +210,6 @@ session_start();
                                     <button class="btn btn--radius-2 btn--blue" type="submit" name="Deconnexion">Deconnexion</button>
                                 </div>
                             </form>
-                            <div>
-                                <?php
-                                if ($erreur == 1) {
-                                    echo '<div class="text-red">Un combattant ne peut pas se combattre lui-meme !</div>';
-                                }
-                                if ($erreur == 2) {
-                                    echo '<div class="text-red">Le gagnant est forcement un des deux combattants !</div>';
-                                }
-                                ?>
-                            </div>
                         </div>
                     </div>
                 </div>

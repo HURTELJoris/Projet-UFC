@@ -27,12 +27,20 @@ session_start();
     <!-- Main CSS-->
     <link href="css/main.css" rel="stylesheet" media="all">
 
-    <link rel="icon" type="image/ico" sizes="700x700" href="img/icone.png">
+    <link rel="icon" type="image/ico" sizes="700x700" href="img/icone.jpg">
 </head>
 
 <body>
     <?php
 
+        if(isset($_POST["Deconnexion"]))
+        {   
+            //Si on appuie sur le bouton "Deconnexion", on supprime les données de la session et on la détruit.
+            session_unset();
+            session_destroy();
+            header('Location: index.php');
+            exit();
+        }
         if(isset($_POST["combattant"]))
         {
             header('Location: combattant.php');
@@ -51,18 +59,39 @@ session_start();
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-                    <h2 class="title" style="font-size:20px; text-align:center">Bienvenue sur le créateur de combat de vos rêves</h2>
+                    <h2 class="title" style="font-size:20px; text-align:center">Bienvenue sur le créateur de combats de vos rêves</h2>
+                    <h3 class="title" style="font-size:20px; text-align:center">Règles</h3>
+                        
+                        <p class="label">- Vous devrez rentrer des noms de combattants</p>
+                    
+                        <p class="label">- pour les combattant il faudrat spécifier sa taille, son poids, sa nationalité, date de naissance, genre, nom et prénom</p>
+                    
+                        <p class="label">- la taille max est de 2.5m et un poid max de 150kg</p>
+                    
+                        <p class="label">- par la suite vous devrez enregistrer un combat avec les combattant de votre choix le lieux du combat et le nom du gagnant</p>
+                     
                     <!-- Début du formulaire -->
                     <form method="POST">
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--blue" type="submit" name="combattant" >combattant</button>
-                            <button class="btn btn--radius-2 btn--blue" type="submit" name="combat">combat</button>
+                            <button class="btn btn--radius-2 btn--blue" type="submit" name="combattant">Vers l'ajout d'un combattant</button>
+                            
                         </div>
+                        <div class="p-t-15">
+                           
+                            <button class="btn btn--radius-2 btn--blue" type="submit" name="combat">Vers la création d'un combat</button>
+
+                        </div>
+                        <div class="p-t-15">
+                           
+                 
+                           <button class="btn btn--radius-2 btn--blue" type="submit" name="Deconnexion">Deconnexion</button>
+                       </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+
 
     <!-- Jquery JS-->
     <script src="vendor/jquery/jquery.min.js"></script>
